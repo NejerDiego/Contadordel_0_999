@@ -1,0 +1,129 @@
+///////////////////////////// DECLARACIÓN DE VARIABLES A UTILIZAR ////////////////////////////
+int A = 13;
+int B = 12;
+int C = 11;
+int D = 10;
+int contador = 0;
+int pulsador = 6;
+int unidades = 9;
+int decenas = 8;
+int centenas= 7;
+int cont_decena=0;
+int cont_unidad=0;
+int cont_centenas=0;
+int cont_obj=0;
+
+void setup() {
+///////////////////////////  DECLARACION DE ENTRADAS O SALIDAS //////////////////////////////7
+  // put your setup code here, to run once:
+  pinMode (A, OUTPUT);
+  pinMode (B, OUTPUT);
+  pinMode (C, OUTPUT);
+  pinMode (D, OUTPUT);
+  pinMode (unidades, OUTPUT);
+  pinMode (decenas, OUTPUT);
+  pinMode (centenas, OUTPUT);
+  pinMode (pulsador, INPUT);
+}
+
+void loop() {
+////////////////////////// CODIGO DEL CONTADOR DEL 0 AL 999 /////////////////////////////////////
+  if (contador < 999) {                        /// CONDICIÓN IF PARA LIMITAR AL CONTADOR HASTA EL 999///
+    contador++;                                /// INCREMENTO DEL CONTADOR UNO X UNO ////
+      cont_centenas= contador/100;             /// FORMULA PARA OBTENCIÓN DE LAS CENTENAS ////
+      digitalWrite(unidades,LOW);              /// SELECCIÓN DEL DISPLAY A ACTIVARSE PARA LA GRAFICACIÓN DE LA CENTENA //
+      digitalWrite(decenas, LOW);
+      digitalWrite(centenas, HIGH);
+      dis(cont_centenas);                       /// LLAMADA DEL METODO PARA SELECCIONAR EL CASO A ENCENDER LOS SEGMENTOS DEL DISPLAY ///
+      delay(500);                               /// RETARDO PARA LA OBSERVACIÓN///
+      cont_decena=((contador - (cont_centenas * 100))/10);   /// FORMULA PARA OBTENCIÓN DE LAS DECENAS //
+      digitalWrite(unidades,LOW);               /// SELECCIÓN DEL DISPLAY A ACTIVARSE PARA LA GRAFICACIÓN DE LA CENTENA //
+      digitalWrite(decenas,HIGH);
+      digitalWrite(centenas,LOW);
+      dis(cont_decena);                        /// LLAMADA DEL METODO PARA SELECCIONAR EL CASO A ENCENDER LOS SEGMENTOS DEL DISPLAY ///
+      delay(300);                              // RETARDO ///
+      cont_obj = ((contador - (cont_centenas * 100))/10);  ///  FORMULAS PARA EL CALCULO DE LAS UNIDADES DEL CONTADOR ///
+      cont_unidad=((contador - (cont_centenas * 100))-cont_obj*10);
+      digitalWrite(unidades,HIGH);            /// SELECCIÓN DEL DISPLAY A ACTIVARSE PARA LA GRAFICACIÓN DE LA CENTENA //
+      digitalWrite(decenas,LOW);
+      digitalWrite(centenas,LOW);
+      dis(cont_unidad);                       /// LLAMADA DEL METODO PARA SELECCIONAR EL CASO A ENCENDER LOS SEGMENTOS DEL DISPLAY ///
+      delay(200);                             // RETARDO //
+    }
+    else
+  {
+    contador = 0;                            // CONDICIÓN ELSE PARA CUANDO EL CONTADOR SUPERE EL 999 Y SE REINICIE ///
+  }
+}
+void dis (int numero) {                      // METODO PARA LA ACTIVACIÓN DE LOS SEGMENTOS DEL DISPLAY CORRESPONDIENTES///
+  switch (numero) {
+    case 0:                                   // CASOS POSIBLES DE LOS DECIMALES DEL 0 AL 9 ///
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 1:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 2:
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 3:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 4:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 5:
+
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+
+    case 6:
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 7:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 8:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, HIGH);
+      break;
+
+    case 9:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, HIGH);
+      break;
+
+  }
+}
